@@ -46,7 +46,7 @@ const AuthorityUpdateForm = ({ issueId, userInfo, onUpdateAdded }) => {
     const formData = new FormData(); formData.append('text', text); if (image) { formData.append('image', image); }
     try {
       const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-      const { data } = await axios.post(`http://localhost:5000/api/issues/${issueId}/update`, formData, config);
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/api/issues/${issueId}/update`, formData, config);
       onUpdateAdded(data.authorityUpdates); setText(''); setImage(null); e.target.reset();
     } catch (error) { alert(error.response?.data?.message || 'Failed to post update.'); } 
     finally { setIsSubmitting(false); }
@@ -81,8 +81,8 @@ export default function IssueDetailPage({ issueId, navigateTo, userInfo }) {
       if (!issueId) { setError('No issue selected.'); setLoading(false); return; }
       try {
         setLoading(true);
-        const issueRes = await axios.get(`http://localhost:5000/api/issues/${issueId}`); setIssue(issueRes.data);
-        const commentsRes = await axios.get(`http://localhost:5000/api/comments/${issueId}`); setComments(commentsRes.data);
+        const issueRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/issues/${issueId}`); setIssue(issueRes.data);
+        const commentsRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/comments/${issueId}`); setComments(commentsRes.data);
       } catch (err) { setError('Failed to load issue details.'); } 
       finally { setLoading(false); }
     };
@@ -95,7 +95,7 @@ export default function IssueDetailPage({ issueId, navigateTo, userInfo }) {
     try {
       const { token } = userInfo;
       const config = { headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } };
-      const { data } = await axios.post(`http://localhost:5000/api/comments/${issueId}`, { text: newComment }, config);
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/api/comments/${issueId}`, { text: newComment }, config);
       setComments([data, ...comments]); setNewComment('');
     } catch (err) { alert('Failed to post comment.'); }
   };

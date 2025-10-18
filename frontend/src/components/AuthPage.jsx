@@ -46,7 +46,7 @@ export default function AuthPage({ onLoginSuccess }) {
     e.preventDefault();
     handleStatus("Logging in...", "info");
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/login', loginData);
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, loginData);
       if (res.data.userId) { // OTP is required
         setUserId(res.data.userId);
         setStep('otp');
@@ -63,7 +63,7 @@ export default function AuthPage({ onLoginSuccess }) {
     e.preventDefault();
     handleStatus("Creating account...", "info");
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/signup', signupData);
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/signup`, signupData);
       setUserId(res.data.userId);
       setStep('otp');
       handleStatus("Account created! Please check your email for the OTP.", "info");
@@ -76,7 +76,7 @@ export default function AuthPage({ onLoginSuccess }) {
     e.preventDefault();
     handleStatus("Verifying OTP...", "info");
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/verify-otp', { userId, otp });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/verify-otp`, { userId, otp });
       onLoginSuccess(res.data); // This triggers the login in App.jsx
     } catch (err) {
       handleStatus(err.response?.data?.message || 'OTP verification failed', 'error');

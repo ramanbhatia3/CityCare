@@ -14,7 +14,7 @@ export default function VolunteerRequestsPage({ userInfo }) {
     const fetchRequests = async () => {
       try {
         const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-        const { data } = await axios.get('http://localhost:5000/api/issues/volunteer-requests', config);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/issues/volunteer-requests`, config);
         setRequests(data);
       } catch (err) {
         setError('Failed to fetch volunteer requests.');
@@ -29,7 +29,7 @@ export default function VolunteerRequestsPage({ userInfo }) {
   const handleManageRequest = async (issueId, decision) => {
     try {
       const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-      await axios.put(`http://localhost:5000/api/issues/${issueId}/volunteer/manage`, { decision }, config);
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/issues/${issueId}/volunteer/manage`, { decision }, config);
       setRequests(requests.filter(req => req._id !== issueId));
     } catch (err) {
       alert(`Failed to ${decision.toLowerCase()} request. Please try again.`);

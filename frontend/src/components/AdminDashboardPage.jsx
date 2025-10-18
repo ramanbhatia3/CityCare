@@ -25,7 +25,7 @@ export default function AdminDashboardPage({ issues = [], setIssues, navigateTo,
     const fetchStats = async () => {
       try {
         const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-        const { data } = await axios.get('http://localhost:5000/api/admin/stats', config);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin/stats`, config);
         setStats(data);
       } catch (error) {
         console.error("Failed to fetch admin stats:", error);
@@ -40,7 +40,7 @@ export default function AdminDashboardPage({ issues = [], setIssues, navigateTo,
     try {
       const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
       const { data: updatedIssue } = await axios.put(
-        `http://localhost:5000/api/issues/${issueId}/status`,
+        `${import.meta.env.VITE_API_URL}/api/issues/${issueId}/status`,
         { status: newStatus },
         config
       );

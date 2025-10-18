@@ -29,7 +29,7 @@ const FeedbackForm = ({ issue, userInfo, onFeedbackSubmitted }) => {
     }
     try {
       const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-      const { data } = await axios.put(`http://localhost:5000/api/issues/${issue._id}/feedback`, { rating, feedback }, config);
+      const { data } = await axios.put(`${import.meta.env.VITE_API_URL}/api/issues/${issue._id}/feedback`, { rating, feedback }, config);
       onFeedbackSubmitted(data);
     } catch (error) {
       alert(error.response?.data?.message || 'Failed to submit feedback.');
@@ -108,7 +108,7 @@ export default function MyProfilePage({ userInfo }) {
       try {
         if (!userInfo || !userInfo.token) { throw new Error('You must be logged in to view your profile.'); }
         const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-        const { data } = await axios.get('http://localhost:5000/api/issues/myissues', config);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/issues/myissues`, config);
         const adaptedIssues = data.map(issue => ({ ...issue, filePreview: issue.imageUrl }));
         setMyIssues(adaptedIssues);
       } catch (err) {

@@ -37,7 +37,7 @@ export default function AllIssuesPage({ navigateTo }) {
   useEffect(() => {
     const fetchAllIssues = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/issues');
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/issues`);
         setIssues(data);
       } catch (err) {
         setError('Failed to fetch issues. Please try again later.');

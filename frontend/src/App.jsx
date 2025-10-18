@@ -31,7 +31,7 @@ export default function App() {
   useEffect(() => {
     const fetchIssues = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/issues');
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/api/issues`);
         const adaptedIssues = data.map(issue => ({ ...issue, filePreview: issue.imageUrl }));
         setIssues(adaptedIssues);
       } catch (error) {
@@ -53,12 +53,12 @@ export default function App() {
       const { token } = JSON.parse(localStorage.getItem('userInfo'));
       const config = { headers: { Authorization: `Bearer ${token}` } };
       
-      const { data: newIssue } = await axios.post('http://localhost:5000/api/issues', formData, config);
+      const { data: newIssue } = await axios.post(`${import.meta.env.VITE_API_URL}/api/issues`, formData, config);
       
       let finalIssue = { ...newIssue, filePreview: newIssue.imageUrl };
 
       if (wantsToVolunteer) {
-        await axios.post(`http://localhost:5000/api/issues/${newIssue._id}/volunteer`, {}, config);
+        await axios.post(`${import.meta.env.VITE_API_URL}/api/issues/${newIssue._id}/volunteer`, {}, config);
         finalIssue.volunteerRequest = 'Pending';
       }
 
