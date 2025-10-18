@@ -13,7 +13,6 @@ export default function DashboardLayout({ children, navigateTo, userInfo, onLogo
   };
 
   return (
-    // ✅ FIX #1: The root container is now a vertical flex column.
     <div className="flex flex-col min-h-screen bg-gray-50 relative">
       {isSidebarOpen && (
         <div
@@ -23,20 +22,18 @@ export default function DashboardLayout({ children, navigateTo, userInfo, onLogo
         ></div>
       )}
 
-      {/* ✅ FIX #2: A new wrapper div that holds the Sidebar and Main Content side-by-side.
-          'flex-1' makes this section grow to fill all available space, pushing the footer down. */}
       <div className="flex flex-1">
-        <Sidebar 
-          navigateTo={navigateTo} 
-          userInfo={userInfo} 
+        <Sidebar
+          navigateTo={navigateTo}
+          userInfo={userInfo}
           isSidebarOpen={isSidebarOpen}
-          closeSidebar={toggleSidebar} 
+          closeSidebar={toggleSidebar}
         />
 
         <div className="flex-1 flex flex-col">
-          <Navbar 
-            navigateTo={navigateTo} 
-            userInfo={userInfo} 
+          <Navbar
+            navigateTo={navigateTo} // Pass navigateTo here
+            userInfo={userInfo}
             onLogout={onLogout}
             onMenuClick={toggleSidebar}
           />
@@ -46,9 +43,7 @@ export default function DashboardLayout({ children, navigateTo, userInfo, onLogo
           </main>
         </div>
       </div>
-      
-      {/* ✅ FIX #3: The Footer is now outside the inner flex container,
-          allowing it to span the full width at the bottom. */}
+
       <Footer />
     </div>
   );
