@@ -87,7 +87,7 @@ Follow these instructions to get the project up and running on your local machin
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/your-username/citycare.git](https://github.com/your-username/citycare.git)
+    git clone _________________________________________________
     cd citycare/backend
     ```
 
@@ -172,9 +172,12 @@ To further enhance CityCare, we plan to implement the following features:
 
 ## Author ✍️
 
--   **[Your Name]** - _Full Stack Developer_
-    -   [GitHub](https://github.com/your-username)
-    -   [LinkedIn](https://linkedin.com/in/your-profile)
+-   **[PseudoCoders]** 
+    Ramandeep Bhatia
+    Navtej Singh
+    Suman Devi
+    Saneha
+
 
 
 
